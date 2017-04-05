@@ -80,23 +80,6 @@ export const defaultFacetConfig: FacetConfig = {
   cell: defaultFacetCellConfig
 };
 
-export type AreaOverlay = 'line' | 'linepoint' | 'none';
-
-export interface OverlayConfig {
-  /**
-   * Whether to overlay line with point.
-   */
-  line?: boolean;
-
-  /**
-   * Type of overlay for area mark (line or linepoint)
-   */
-  area?: AreaOverlay;
-}
-
-export const defaultOverlayConfig: OverlayConfig = {
-  line: false
-};
 
 export type RangeConfig = (number|string)[] | VgRangeScheme | {step: number};
 
@@ -162,10 +145,6 @@ export interface Config  extends TopLevelProperties {
   tick?: TickConfig;
 
   // OTHER CONFIG
-
-  // FIXME: move this to line/area
-  /** Mark Overlay Config */
-  overlay?: OverlayConfig;
 
   /** Scale Config */
   scale?: ScaleConfig;
@@ -256,7 +235,6 @@ export const defaultConfig: Config = {
   text: mark.defaultTextConfig,
   tick: mark.defaultTickConfig,
 
-  overlay: defaultOverlayConfig,
   scale: defaultScaleConfig,
   axis: {},
   axisX: {},

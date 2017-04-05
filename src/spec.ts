@@ -207,6 +207,21 @@ function isNonFacetUnitSpecWithPrimitiveMark(spec: GenericUnitSpec<string | Mark
     return isPrimitiveMark(spec.mark);
 }
 
+
+type AreaOverlay = 'line' | 'linepoint' | 'none';
+
+interface OverlayConfig {
+  /**
+   * Whether to overlay line with point.
+   */
+  line?: boolean;
+
+  /**
+   * Type of overlay for area mark (line or linepoint)
+   */
+  area?: AreaOverlay;
+}
+
 function normalizeNonFacetUnit(spec: GenericUnitSpec<string | MarkDef, Encoding>, config: Config) {
   if (isNonFacetUnitSpecWithPrimitiveMark(spec)) {
     // TODO: thoroughly test
@@ -214,7 +229,7 @@ function normalizeNonFacetUnit(spec: GenericUnitSpec<string | MarkDef, Encoding>
       return normalizeRangedUnit(spec);
     }
 
-    const overlayConfig = config && config.overlay;
+    const overlayConfig: OverlayConfig = config && config.overlay;
     const overlayWithLine = overlayConfig  && spec.mark === AREA &&
       contains(['linepoint', 'line'], overlayConfig.area);
     const overlayWithPoint = overlayConfig && (
