@@ -38,7 +38,7 @@ export interface FieldDef {
 
   /**
    * The encoded field's type of measurement. This can be either a full type
-   * name (`"quantitative"`, `"temporal"`, `"ordinal"`,  and `"nominal"`)
+   * name (`"quantitative"`, `"temporal"`, `"ordinal"`, `"latitude"`, `"longitude"`  and `"nominal"`)
    * or an initial character of the type name (`"Q"`, `"T"`, `"O"`, `"N"`).
    * This property is case insensitive.
    */
@@ -193,6 +193,9 @@ export function isDiscrete(fieldDef: FieldDef) {
     case 'nominal':
     case 'ordinal':
       return true;
+    case 'latitude':
+    case 'longitude':
+      return false;
     case 'quantitative':
       return !!fieldDef.bin;
     case 'temporal':
@@ -261,6 +264,7 @@ export function normalize(fieldDef: ChannelDef, channel: Channel) {
         };
       }
     } else {
+      console.log('failed to noramlize');
       // If type is empty / invalid, then augment with default type
       const newType = defaultType(fieldDef, channel);
       log.warn(log.message.emptyOrInvalidFieldType(fieldDef.type, channel, newType));

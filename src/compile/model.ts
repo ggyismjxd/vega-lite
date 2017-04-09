@@ -1,5 +1,3 @@
-
-
 import {Axis} from '../axis';
 import {Channel, COLUMN, X} from '../channel';
 import {CellConfig, Config} from '../config';
@@ -7,12 +5,13 @@ import {Data, DataSourceType, isNamedData, SOURCE} from '../data';
 import {forEach, reduce} from '../encoding';
 import {ChannelDef, field, FieldDef, FieldRefOption, isFieldDef} from '../fielddef';
 import {Legend} from '../legend';
+import {Projection} from '../projection';
 import {hasDiscreteDomain, Scale} from '../scale';
 import {SortField, SortOrder} from '../sort';
 import {BaseSpec} from '../spec';
 import {Transform} from '../transform';
 import {Dict, extend, vals} from '../util';
-import {VgAxis, VgData, VgEncodeEntry, VgLegend, VgScale} from '../vega.schema';
+import {VgAxis, VgData, VgEncodeEntry, VgLegend, VgProjection, VgScale} from '../vega.schema';
 
 import {StackProperties} from '../stack';
 import {DataComponent} from './data/data';
@@ -30,6 +29,9 @@ export interface Component {
   layout: LayoutComponent;
   scales: Dict<VgScale>;
   selection: Dict<SelectionComponent>;
+
+  /** Array of projections, which don't use channel mapping */
+  projections: VgProjection[];
 
   /** Dictionary mapping channel to VgAxis definition */
   axes: Dict<VgAxis[]>;
@@ -97,7 +99,10 @@ export abstract class Model {
   protected sizeNameMap: NameMapInterface;
 
   protected readonly transform: Transform;
+
   protected readonly scales: Dict<Scale> = {};
+
+  public readonly projection: Projection;
 
   protected readonly axes: Dict<Axis> = {};
 
@@ -128,13 +133,25 @@ export abstract class Model {
     this.description = spec.description;
     this.transforms = spec.transform || [];
 
-    this.component = {data: null, layout: null, mark: null, scales: null, axes: null, axisGroups: null, gridGroups: null, legends: null, selection: null};
+    this.component = {
+      data: null,
+      layout: null,
+      mark: null,
+      scales: null,
+      projections: null,
+      axes: null,
+      axisGroups: null,
+      gridGroups: null,
+      legends: null,
+      selection: null
+    };
   }
 
   public parse() {
     this.parseData();
     this.parseLayoutData();
     this.parseScale(); // depends on data name
+    this.parseProjection();
     this.parseSelection();
     this.parseAxis(); // depends on scale name
     this.parseLegend(); // depends on scale name
@@ -150,6 +167,8 @@ export abstract class Model {
   public abstract parseLayoutData(): void;
 
   public abstract parseScale(): void;
+
+  public abstract parseProjection(): void;
 
   public abstract parseMark(): void;
 
@@ -174,6 +193,10 @@ export abstract class Model {
     return vals(this.component.scales);
   }
 
+  public assembleProjections(): VgProjection[] {
+    return this.component.projections || [];
+  }
+
   public abstract assembleMarks(): any[]; // TODO: VgMarkGroup[]
 
   public assembleAxes(): VgAxis[] {
@@ -194,9 +217,15 @@ export abstract class Model {
 
     // TODO: consider if we want scales to come before marks in the output spec.
     group.marks = this.assembleMarks();
+
     const scales = this.assembleScales();
     if (scales.length > 0) {
       group.scales = scales;
+    }
+
+    const projections = this.assembleProjections();
+    if (projections.length > 0) {
+      group.projections = projections;
     }
 
     const axes = this.assembleAxes();
@@ -234,14 +263,8 @@ export abstract class Model {
 
   public hasDescendantWithFieldOnChannel(channel: Channel) {
     for (let child of this.children) {
-      if (child.isUnit()) {
-        if (child.channelHasField(channel)) {
-          return true;
-        }
-      } else {
-        if (child.hasDescendantWithFieldOnChannel(channel)) {
-          return true;
-        }
+      if ((child.isUnit() && child.channelHasField(channel)) || child.hasDescendantWithFieldOnChannel(channel)) {
+        return true;
       }
     }
     return false;
@@ -253,6 +276,7 @@ export abstract class Model {
     if (this.data && text === SOURCE && isNamedData(this.data)) {
       return this.data.name;
     }
+
     return (this.name ? this.name + delimiter : '') + text;
   }
 
@@ -279,7 +303,7 @@ export abstract class Model {
   }
 
   public sizeName(size: string): string {
-     return this.sizeNameMap.get(this.getName(size, '_'));
+     return this.sizeNameMap.get(this.getName(size));
   }
 
   public abstract dataTable(): string;
@@ -311,7 +335,6 @@ export abstract class Model {
   public renameScale(oldName: string, newName: string) {
     this.scaleNameMap.rename(oldName, newName);
   }
-
 
   /**
    * @return scale name for a given channel after the scale has been parsed and named.

@@ -9,14 +9,14 @@ import {isArray, some} from './util';
 export interface Encoding {
   /**
    * X coordinates for `point`, `circle`, `square`,
-   * `line`, `rule`, `text`, and `tick`
+   * `line`, `rule`, `text`, `geoshape` and `tick`
    * (or to width and height for `bar` and `area` marks).
    */
   x?: PositionFieldDef | ValueDef<number>;
 
   /**
    * Y coordinates for `point`, `circle`, `square`,
-   * `line`, `rule`, `text`, and `tick`
+   * `line`, `rule`, `text`, `geoshape` and `tick`
    * (or to width and height for `bar` and `area` marks).
    */
   y?: PositionFieldDef | ValueDef<number>;
@@ -33,7 +33,7 @@ export interface Encoding {
 
   /**
    * Color of the marks – either fill or stroke color based on mark type.
-   * (By default, fill color for `area`, `bar`, `tick`, `text`, `circle`, and `square` /
+   * (By default, fill color for `area`, `bar`, `tick`, `text`, `circle`, `geoshape` and `square` /
    * stroke color for `line` and `point`.)
    */
   color?: LegendFieldDef<string> | ConditionalValueDef<string>;

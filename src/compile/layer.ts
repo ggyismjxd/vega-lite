@@ -5,16 +5,18 @@ import {isUrlData} from '../data';
 import {FieldDef} from '../fielddef';
 import {Legend} from '../legend';
 import {FILL_STROKE_CONFIG} from '../mark';
+import {Projection} from '../projection';
 import {Scale} from '../scale';
 import {LayerSpec} from '../spec';
 import {StackProperties} from '../stack';
 import {Dict, flatten, keys} from '../util';
-import {isSignalRefDomain, VgData, VgEncodeEntry, VgScale} from '../vega.schema';
+import {isSignalRefDomain, VgData, VgEncodeEntry, VgProjection, VgScale} from '../vega.schema';
 
 import {applyConfig, buildModel} from './common';
 import {assembleData, parseLayerData} from './data/data';
 import {assembleLayout, parseLayerLayout} from './layout';
 import {Model} from './model';
+import {initProjection} from './projection/init';
 import {UnitModel} from './unit';
 
 import {unionDomains} from './scale/domain';
@@ -28,6 +30,8 @@ export class LayerModel extends Model {
   protected readonly axes: Dict<Axis> = {};
 
   protected readonly legends: Dict<Legend> = {};
+
+  public readonly projection: Projection;
 
   public readonly config: Config;
 
@@ -52,6 +56,8 @@ export class LayerModel extends Model {
 
     this.width = spec.width;
     this.height = spec.height;
+
+    this.projection = initProjection(this.config, spec.projection);
 
     this.children = spec.layer.map((layer, i) => {
       // FIXME: this is not always the case
@@ -138,6 +144,12 @@ export class LayerModel extends Model {
     });
   }
 
+  public parseProjection() {
+    this.children.forEach(child => {
+      child.parseProjection();
+    });
+  }
+
   public parseMark() {
     this.children.forEach(function(child) {
       child.parseMark();
@@ -207,6 +219,14 @@ export class LayerModel extends Model {
     return this.children.reduce((scales, c) => {
       return scales.concat(c.assembleScales());
     }, super.assembleScales());
+  }
+
+  public assembleProjections(): VgProjection[] {
+    // aggregate scales from children into one array
+    // TODO: reduce redundency?
+    return this.children.reduce((projections, c) => {
+      return projections.concat(c.assembleProjections());
+    }, []);
   }
 
   public assembleData(data: VgData[]): VgData[] {

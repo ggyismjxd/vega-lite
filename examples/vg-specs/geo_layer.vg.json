@@ -1,0 +1,230 @@
+{
+    "$schema": "http://vega.github.io/schema/vega/v3.0.json",
+    "autosize": "pad",
+    "padding": 5,
+    "signals": [
+        {
+            "name": "width",
+            "update": "data('layout')[0].width"
+        },
+        {
+            "name": "height",
+            "update": "data('layout')[0].height"
+        },
+        {
+            "name": "unit",
+            "value": {},
+            "on": [
+                {
+                    "events": "mousemove",
+                    "update": "group()._id ? group() : unit"
+                }
+            ]
+        }
+    ],
+    "data": [
+        {
+            "name": "source",
+            "url": "data/airports.json",
+            "format": {
+                "type": "json",
+                "parse": {}
+            },
+            "transform": []
+        },
+        {
+            "name": "layer_0_source",
+            "source": "source",
+            "transform": []
+        },
+        {
+            "name": "layer_1_source",
+            "source": "source",
+            "transform": []
+        },
+        {
+            "name": "layout",
+            "values": [
+                {}
+            ],
+            "transform": [
+                {
+                    "type": "formula",
+                    "as": "width",
+                    "expr": "21"
+                },
+                {
+                    "type": "formula",
+                    "as": "height",
+                    "expr": "21"
+                }
+            ]
+        }
+    ],
+    "marks": [
+        {
+            "name": "main",
+            "type": "group",
+            "from": {
+                "data": "layout"
+            },
+            "encode": {
+                "update": {
+                    "width": {
+                        "field": "width"
+                    },
+                    "height": {
+                        "field": "height"
+                    },
+                    "fill": {
+                        "value": "transparent"
+                    }
+                }
+            },
+            "marks": [
+                {
+                    "name": "layer_0_marks",
+                    "type": "shape",
+                    "role": "geoshape",
+                    "from": {
+                        "data": "layer_0_source"
+                    },
+                    "encode": {
+                        "update": {
+                            "fill": {
+                                "value": "#4682b4"
+                            },
+                            "opacity": {
+                                "value": 0.7
+                            }
+                        }
+                    },
+                    "transform": {
+                        "type": "geoshape",
+                        "projection": "layer_0_projection",
+                        "as": "shape"
+                    }
+                },
+                {
+                    "name": "layer_1_marks",
+                    "type": "symbol",
+                    "role": "circle",
+                    "from": {
+                        "data": "layer_1_source"
+                    },
+                    "encode": {
+                        "update": {
+                            "x": {
+                                "scale": "x",
+                                "field": "longitude"
+                            },
+                            "y": {
+                                "scale": "y",
+                                "field": "latitude"
+                            },
+                            "fill": {
+                                "value": "#4c78a8"
+                            },
+                            "shape": {
+                                "value": "circle"
+                            },
+                            "opacity": {
+                                "value": 0.7
+                            }
+                        }
+                    },
+                    "transform": {
+                        "type": "geopoint",
+                        "projection": "layer_1_projection",
+                        "as": [
+                            "x",
+                            "y"
+                        ],
+                        "fields": [
+                            "longitude",
+                            "latitude"
+                        ]
+                    }
+                }
+            ],
+            "scales": [
+                {
+                    "name": "x",
+                    "type": "linear",
+                    "domain": {
+                        "data": "layer_1_source",
+                        "field": "longitude"
+                    },
+                    "range": [
+                        0,
+                        200
+                    ],
+                    "round": true,
+                    "nice": true,
+                    "zero": true
+                },
+                {
+                    "name": "y",
+                    "type": "linear",
+                    "domain": {
+                        "data": "layer_1_source",
+                        "field": "latitude"
+                    },
+                    "range": [
+                        200,
+                        0
+                    ],
+                    "round": true,
+                    "nice": true,
+                    "zero": true
+                }
+            ],
+            "projections": [
+                {
+                    "name": "layer_0_projection",
+                    "type": "albersUsa"
+                },
+                {
+                    "name": "layer_1_projection",
+                    "type": "albersUsa"
+                }
+            ],
+            "axes": [
+                {
+                    "scale": "x",
+                    "orient": "bottom",
+                    "tickCount": 5,
+                    "title": "longitude",
+                    "zindex": 1
+                },
+                {
+                    "scale": "x",
+                    "domain": false,
+                    "grid": true,
+                    "labels": false,
+                    "orient": "bottom",
+                    "tickCount": 5,
+                    "ticks": false,
+                    "zindex": 0,
+                    "gridScale": "y"
+                },
+                {
+                    "scale": "y",
+                    "orient": "left",
+                    "title": "latitude",
+                    "zindex": 1
+                },
+                {
+                    "scale": "y",
+                    "domain": false,
+                    "grid": true,
+                    "labels": false,
+                    "orient": "left",
+                    "ticks": false,
+                    "zindex": 0,
+                    "gridScale": "x"
+                }
+            ]
+        }
+    ]
+}

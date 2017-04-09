@@ -6,6 +6,7 @@ import {Facet} from '../facet';
 import {FieldDef, normalize} from '../fielddef';
 import {Legend} from '../legend';
 import * as log from '../log';
+import {Projection} from '../projection';
 import {Scale} from '../scale';
 import {FacetSpec} from '../spec';
 import {StackProperties} from '../stack';
@@ -39,11 +40,14 @@ export class FacetModel extends Model {
   public readonly child: Model;
 
   public readonly children: Model[];
+
   protected readonly scales: Dict<Scale> = {};
 
   protected readonly axes: Dict<Axis> = {};
 
   protected readonly legends: Dict<Legend> = {};
+
+  public readonly projection: Projection;
 
   public readonly config: Config;
 
@@ -62,7 +66,7 @@ export class FacetModel extends Model {
 
     const facet  = this.facet = this.initFacet(spec.facet);
     this.scales  = this.initScalesAndSpacing(facet, this.config);
-    this.axes   = this.initAxis(facet, this.config, child);
+    this.axes    = this.initAxis(facet, this.config, child);
     this.legends = {};
   }
 
@@ -169,6 +173,11 @@ export class FacetModel extends Model {
   public parseData() {
     this.child.parseData();
     this.component.data = parseFacetData(this);
+  }
+
+  public parseProjection() {
+    this.component.projections = this.child.component.projections;
+    this.child.component.projections = [];
   }
 
   public parseSelection() {
@@ -303,7 +312,6 @@ export class FacetModel extends Model {
 
     return data;
   }
-
 
   public assembleLayout(layoutData: VgData[]): VgData[] {
     // Postfix traversal – layout is assembled bottom-up

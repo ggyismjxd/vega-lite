@@ -1,0 +1,254 @@
+{
+    "$schema": "http://vega.github.io/schema/vega/v3.0.json",
+    "autosize": "pad",
+    "padding": 5,
+    "signals": [
+        {
+            "name": "width",
+            "update": "data('layout')[0].width"
+        },
+        {
+            "name": "height",
+            "update": "data('layout')[0].height"
+        },
+        {
+            "name": "unit",
+            "value": {},
+            "on": [
+                {
+                    "events": "mousemove",
+                    "update": "group()._id ? group() : unit"
+                }
+            ]
+        }
+    ],
+    "data": [
+        {
+            "name": "source",
+            "url": "data/airports.csv",
+            "format": {
+                "type": "csv",
+                "parse": {}
+            },
+            "transform": []
+        },
+        {
+            "name": "row-source",
+            "source": "source",
+            "transform": [
+                {
+                    "type": "aggregate",
+                    "groupby": [
+                        "year"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "layout",
+            "source": "source",
+            "transform": [
+                {
+                    "type": "aggregate",
+                    "fields": [
+                        "year"
+                    ],
+                    "ops": [
+                        "distinct"
+                    ]
+                },
+                {
+                    "type": "formula",
+                    "as": "child_width",
+                    "expr": "21"
+                },
+                {
+                    "type": "formula",
+                    "as": "width",
+                    "expr": "datum[\"child_width\"] + 16"
+                },
+                {
+                    "type": "formula",
+                    "as": "child_height",
+                    "expr": "21"
+                },
+                {
+                    "type": "formula",
+                    "as": "height",
+                    "expr": "(datum[\"child_height\"] + 0) * datum[\"distinct_year\"]"
+                }
+            ]
+        }
+    ],
+    "marks": [
+        {
+            "name": "main",
+            "type": "group",
+            "from": {
+                "data": "layout"
+            },
+            "encode": {
+                "update": {
+                    "width": {
+                        "field": "width"
+                    },
+                    "height": {
+                        "field": "height"
+                    }
+                }
+            },
+            "marks": [
+                {
+                    "name": "row-grid",
+                    "type": "rule",
+                    "from": {
+                        "data": "row-source"
+                    },
+                    "encode": {
+                        "update": {
+                            "y": {
+                                "scale": "row",
+                                "field": "year"
+                            },
+                            "x": {
+                                "value": 0,
+                                "offset": 0
+                            },
+                            "x2": {
+                                "field": {
+                                    "group": "width"
+                                },
+                                "offset": 0
+                            },
+                            "stroke": {
+                                "value": "#000000"
+                            },
+                            "strokeOpacity": {
+                                "value": 0.4
+                            },
+                            "strokeWidth": {
+                                "value": 0.5
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "row-grid-end",
+                    "type": "rule",
+                    "encode": {
+                        "update": {
+                            "y": {
+                                "field": {
+                                    "group": "height"
+                                }
+                            },
+                            "x": {
+                                "value": 0,
+                                "offset": 0
+                            },
+                            "x2": {
+                                "field": {
+                                    "group": "width"
+                                },
+                                "offset": 0
+                            },
+                            "stroke": {
+                                "value": "#000000"
+                            },
+                            "strokeOpacity": {
+                                "value": 0.4
+                            },
+                            "strokeWidth": {
+                                "value": 0.5
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "cell",
+                    "type": "group",
+                    "from": {
+                        "facet": {
+                            "name": "faceted-data",
+                            "data": "source",
+                            "groupby": [
+                                "year"
+                            ]
+                        }
+                    },
+                    "encode": {
+                        "update": {
+                            "x": {
+                                "value": 8
+                            },
+                            "y": {
+                                "scale": "row",
+                                "field": "year",
+                                "offset": 0
+                            },
+                            "width": {
+                                "field": {
+                                    "parent": "child_width"
+                                }
+                            },
+                            "height": {
+                                "field": {
+                                    "parent": "child_height"
+                                }
+                            }
+                        }
+                    },
+                    "marks": [
+                        {
+                            "name": "child_marks",
+                            "type": "shape",
+                            "role": "geoshape",
+                            "from": {
+                                "data": "faceted-data"
+                            },
+                            "encode": {
+                                "update": {
+                                    "fill": {
+                                        "value": "#4682b4"
+                                    },
+                                    "opacity": {
+                                        "value": 0.7
+                                    }
+                                }
+                            },
+                            "transform": {
+                                "type": "geoshape",
+                                "projection": "child_projection",
+                                "as": "shape"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "scales": [
+                {
+                    "name": "row",
+                    "type": "band",
+                    "domain": {
+                        "data": "source",
+                        "field": "year",
+                        "sort": true
+                    },
+                    "range": "height",
+                    "round": true
+                }
+            ],
+            "axes": [
+                {
+                    "scale": "row",
+                    "domain": false,
+                    "grid": false,
+                    "orient": "left",
+                    "ticks": false,
+                    "title": "year",
+                    "zindex": 1
+                }
+            ]
+        }
+    ]
+}

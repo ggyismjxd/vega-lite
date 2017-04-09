@@ -7,13 +7,14 @@ import * as vlEncoding from '../encoding'; // TODO: remove
 import {field, FieldDef, FieldRefOption, isFieldDef} from '../fielddef';
 import {Legend} from '../legend';
 import {FILL_STROKE_CONFIG, isMarkDef, Mark, MarkDef, TEXT as TEXT_MARK} from '../mark';
+import {Projection} from '../projection';
 import {hasDiscreteDomain, Scale} from '../scale';
+import {SelectionDef} from '../selection';
 import {UnitSpec} from '../spec';
+import {stack, StackProperties} from '../stack';
 import {Dict, duplicate, extend} from '../util';
 import {VgData} from '../vega.schema';
 
-import {SelectionDef} from '../selection';
-import {stack, StackProperties} from '../stack';
 import {parseAxisComponent} from './axis/parse';
 import {applyConfig} from './common';
 import {assembleData, parseUnitData} from './data/data';
@@ -22,6 +23,8 @@ import {parseLegendComponent} from './legend/parse';
 import {initEncoding, initMarkDef} from './mark/init';
 import {parseMark} from './mark/mark';
 import {Model} from './model';
+import {initProjection} from './projection/init';
+import {parseProjectionComponent} from './projection/parse';
 import initScale from './scale/init';
 import parseScaleComponent from './scale/parse';
 import {assembleUnitData as assembleSelectionData, assembleUnitMarks as assembleSelectionMarks, assembleUnitSignals, parseUnitSelection} from './selection/selection';
@@ -46,6 +49,7 @@ export class UnitModel extends Model {
 
   public readonly markDef: MarkDef;
   public readonly encoding: Encoding;
+  public readonly projection: Projection;
   protected readonly selection: Dict<SelectionDef> = {};
   protected readonly scales: Dict<Scale> = {};
   protected readonly axes: Dict<Axis> = {};
@@ -68,6 +72,8 @@ export class UnitModel extends Model {
     const providedHeight = spec.height !== undefined ? spec.height :
       parent ? parent['height'] : undefined; // only exists if parent is layer
 
+    const parentProjection = parent ? parent.projection : undefined;
+
     const mark = isMarkDef(spec.mark) ? spec.mark.type : spec.mark;
     const encoding = this.encoding = normalizeEncoding(spec.encoding || {}, mark);
 
@@ -80,6 +86,8 @@ export class UnitModel extends Model {
 
     this.axes = this.initAxes(encoding);
     this.legends = this.initLegend(encoding);
+
+    this.projection = initProjection(this.config, spec.projection, parentProjection, mark, encoding);
 
     // Selections will be initialized upon parse.
     this.selection = spec.selection;
@@ -224,6 +232,10 @@ export class UnitModel extends Model {
 
   public parseScale() {
     this.component.scales = parseScaleComponent(this);
+  }
+
+  public parseProjection() {
+    this.component.projections = parseProjectionComponent(this);
   }
 
   public parseMark() {

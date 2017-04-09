@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "data": {
+    "url": "data/airports.json"
+  },
+  "projection": {
+    "type": "albersUsa"
+  },
+  "layer": [{
+      "mark": "geoshape",
+      "encoding": {
+        "color": {
+          "value": "#4682b4"
+        },
+        "opacity": {
+          "value": 0.7
+        }
+      }
+    },
+    {
+      "mark": "circle",
+      "encoding": {
+        "x": {
+          "field": "longitude",
+          "type": "longitude"
+        },
+        "y": {
+          "field": "latitude",
+          "type": "latitude"
+        }
+      }
+    }
+  ]
+}

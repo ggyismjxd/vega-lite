@@ -11,6 +11,7 @@ import {COLUMN, ROW, X, X2, Y, Y2} from './channel';
 import * as vlEncoding from './encoding';
 import * as log from './log';
 import {AREA, isPrimitiveMark, LINE, Mark, MarkDef} from './mark';
+import {Projection} from './projection';
 import {SelectionDef} from './selection';
 import {stack} from './stack';
 import {TopLevelProperties} from './toplevelprops';
@@ -50,6 +51,11 @@ export interface BaseSpec {
   data?: Data;
 
   /**
+   * A geo projection
+   */
+  projection?: Projection;
+
+  /**
    * An object describing filter and new field calculation.
    */
   transform?: Transform[];
@@ -65,7 +71,7 @@ export interface GenericUnitSpec<M, E extends Encoding> extends BaseSpec {
   /**
    * The mark type.
    * One of `"bar"`, `"circle"`, `"square"`, `"tick"`, `"line"`,
-   * `"area"`, `"point"`, `"rule"`, and `"text"`.
+   * `"area"`, `"point"`, `"rule"`, `"geoshape"` and `"text"`.
    */
   mark: M;
 
