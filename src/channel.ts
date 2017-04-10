@@ -126,7 +126,7 @@ export function getSupportedMark(channel: Channel): SupportedMark {
         bar: true, text: true, line: true
       };
     case SHAPE:
-      return {point: true};
+      return {point: true, geoshape: true};
     case TEXT:
       return {text: true};
 

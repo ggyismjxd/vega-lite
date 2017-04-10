@@ -324,7 +324,7 @@ export function channelCompatibility(fieldDef: FieldDef, channel: Channel): {com
       return COMPATIBLE;
 
     case 'shape':
-      if (fieldDef.type !== NOMINAL) {
+      if (fieldDef.type !== NOMINAL) { // TODO: allow for shape to be type GEOJSON
         return {
           compatible: false,
           warning: 'Shape channel should be used with nominal data only'
