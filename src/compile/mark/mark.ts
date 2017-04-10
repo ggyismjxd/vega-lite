@@ -56,7 +56,7 @@ function parsePathMark(model: UnitModel) {
   const mark = model.mark();
   // FIXME: replace this with more general case for composition
   const details = detailFields(model);
-  const transform = typeof markCompiler[mark].transform === 'function';
+  const transform = markCompiler[mark].transform;
 
   let pathMarks: any = [
     {
@@ -66,7 +66,7 @@ function parsePathMark(model: UnitModel) {
       // FIXME: support sorting path order (in connected scatterplot)
       from: {data: (details.length > 0 ? FACETED_PATH_PREFIX : '') + dataFrom(model)},
       encode: {update: markCompiler[mark].encodeEntry(model)},
-      ...(transform ? {transform: [markCompiler[mark].transform(model)]} : {})
+      ...(transform ? {transform: [transform(model)]} : {})
     }
   ];
 
@@ -89,7 +89,7 @@ function parsePathMark(model: UnitModel) {
           height: {field: {group: 'height'}}
         }
       },
-      ...(transform ? {transform: [markCompiler[mark].transform(model)]} : {}),
+      ...(transform ? {transform: [transform(model)]} : {}),
       marks: pathMarks
     }];
   } else {
@@ -101,7 +101,7 @@ function parseNonPathMark(model: UnitModel) {
   const mark = model.mark();
 
   const role = model.markDef.role || markCompiler[mark].defaultRole;
-  const transform = typeof markCompiler[mark].transform === 'function';
+  const transform = markCompiler[mark].transform;
 
   let marks: any[] = []; // TODO: vgMarks
 
@@ -113,12 +113,11 @@ function parseNonPathMark(model: UnitModel) {
     ...(role? {role} : {}),
     from: {data: dataFrom(model)},
     encode: {update: markCompiler[mark].encodeEntry(model)},
-    ...(transform ? {transform: [markCompiler[mark].transform(model)]} : {}),
+    ...(transform ? {transform: [transform(model)]} : {}),
   });
 
   return marks;
 }
-
 
 
 /**
