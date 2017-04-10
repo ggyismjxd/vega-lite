@@ -105,6 +105,16 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "layer_0_projection",
+                    "type": "mercator"
+                },
+                {
+                    "name": "layer_1_projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "layer_0_marks",
@@ -152,7 +162,10 @@
                                 "value": 0.7
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 }
             ],
             "scales": [

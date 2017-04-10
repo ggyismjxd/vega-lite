@@ -223,6 +223,12 @@
                     ]
                 }
             ],
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "type": "group",
@@ -264,12 +270,12 @@
                                         "scale": "y",
                                         "field": "Miles_per_Gallon"
                                     },
-                                    "fill": {
-                                        "value": "#4c78a8"
-                                    },
                                     "size": {
                                         "scale": "size",
                                         "field": "Cylinders"
+                                    },
+                                    "fill": {
+                                        "value": "#4c78a8"
                                     },
                                     "shape": {
                                         "value": "circle"
@@ -278,7 +284,10 @@
                                         "value": 0.7
                                     }
                                 }
-                            }
+                            },
+                            "transform": [
+                                null
+                            ]
                         }
                     ]
                 }

@@ -326,6 +326,12 @@
                     ]
                 }
             ],
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "type": "rect",
@@ -389,7 +395,10 @@
                                 "value": 0.7
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 },
                 {
                     "name": "brush_brush",

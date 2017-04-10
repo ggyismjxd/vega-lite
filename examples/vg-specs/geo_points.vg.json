@@ -41,12 +41,12 @@
                 {
                     "type": "formula",
                     "as": "width",
-                    "expr": "200"
+                    "expr": "21"
                 },
                 {
                     "type": "formula",
                     "as": "height",
-                    "expr": "200"
+                    "expr": "21"
                 }
             ]
         }
@@ -71,6 +71,12 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "albersUsa"
+                }
+            ],
             "marks": [
                 {
                     "name": "marks",
@@ -81,14 +87,8 @@
                     },
                     "encode": {
                         "update": {
-                            "x": {
-                                "scale": "x",
-                                "field": "longitude"
-                            },
-                            "y": {
-                                "scale": "y",
-                                "field": "latitude"
-                            },
+                            "field": "latitude",
+                            "type": "latitude",
                             "fill": {
                                 "value": "#4c78a8"
                             },
@@ -100,92 +100,50 @@
                             }
                         }
                     },
-                    "transform": {
-                        "type": "geopoint",
-                        "projection": "projection",
-                        "as": [
-                            "x",
-                            "y"
-                        ],
-                        "fields": [
-                            "longitude",
-                            "latitude"
-                        ]
-                    }
-                }
-            ],
-            "scales": [
-                {
-                    "name": "x",
-                    "type": "linear",
-                    "domain": {
-                        "data": "source",
-                        "field": "longitude"
-                    },
-                    "range": [
-                        0,
-                        200
-                    ],
-                    "round": true,
-                    "nice": true,
-                    "zero": true
-                },
-                {
-                    "name": "y",
-                    "type": "linear",
-                    "domain": {
-                        "data": "source",
-                        "field": "latitude"
-                    },
-                    "range": [
-                        200,
-                        0
-                    ],
-                    "round": true,
-                    "nice": true,
-                    "zero": true
-                }
-            ],
-            "projections": [
-                {
-                    "name": "projection",
-                    "type": "albersUsa"
+                    "transform": [
+                        {
+                            "type": "geopoint",
+                            "projection": "projection",
+                            "as": [
+                                "x",
+                                "y"
+                            ],
+                            "fields": [
+                                "longitude",
+                                "latitude"
+                            ]
+                        }
+                    ]
                 }
             ],
             "axes": [
                 {
-                    "scale": "x",
                     "orient": "bottom",
                     "tickCount": 5,
                     "title": "longitude",
                     "zindex": 1
                 },
                 {
-                    "scale": "x",
                     "domain": false,
                     "grid": true,
                     "labels": false,
                     "orient": "bottom",
                     "tickCount": 5,
                     "ticks": false,
-                    "zindex": 0,
-                    "gridScale": "y"
+                    "zindex": 0
                 },
                 {
-                    "scale": "y",
                     "orient": "left",
                     "title": "latitude",
                     "zindex": 1
                 },
                 {
-                    "scale": "y",
                     "domain": false,
                     "grid": true,
                     "labels": false,
                     "orient": "left",
                     "ticks": false,
-                    "zindex": 0,
-                    "gridScale": "x"
+                    "zindex": 0
                 }
             ]
         }

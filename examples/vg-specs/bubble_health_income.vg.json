@@ -85,6 +85,12 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "marks",
@@ -103,12 +109,12 @@
                                 "scale": "y",
                                 "field": "health"
                             },
-                            "fill": {
-                                "value": "#000"
-                            },
                             "size": {
                                 "scale": "size",
                                 "field": "population"
+                            },
+                            "fill": {
+                                "value": "#000"
                             },
                             "shape": {
                                 "value": "circle"
@@ -117,7 +123,10 @@
                                 "value": 0.7
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 }
             ],
             "scales": [

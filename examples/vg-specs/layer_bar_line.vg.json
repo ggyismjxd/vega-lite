@@ -144,6 +144,16 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "layer_0_projection",
+                    "type": "mercator"
+                },
+                {
+                    "name": "layer_1_projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "layer_0_marks",

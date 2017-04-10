@@ -99,6 +99,12 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "marks",
@@ -117,21 +123,24 @@
                                 "scale": "y",
                                 "field": "Miles_per_Gallon"
                             },
+                            "size": {
+                                "scale": "size",
+                                "field": "bin_Acceleration_start"
+                            },
                             "stroke": {
                                 "value": "#4c78a8"
                             },
                             "fill": {
                                 "value": "transparent"
                             },
-                            "size": {
-                                "scale": "size",
-                                "field": "bin_Acceleration_start"
-                            },
                             "opacity": {
                                 "value": 0.7
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 }
             ],
             "scales": [

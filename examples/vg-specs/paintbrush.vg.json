@@ -137,6 +137,12 @@
                     ]
                 }
             ],
+            "projections": [
+                {
+                    "name": "projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "marks",
@@ -155,12 +161,6 @@
                                 "scale": "y",
                                 "field": "Miles_per_Gallon"
                             },
-                            "stroke": {
-                                "value": "#4c78a8"
-                            },
-                            "fill": {
-                                "value": "transparent"
-                            },
                             "size": [
                                 {
                                     "test": "vlPoint(\"paintbrush_store\", parent._id, datum, \"union\", \"all\")",
@@ -170,11 +170,20 @@
                                     "value": 50
                                 }
                             ],
+                            "stroke": {
+                                "value": "#4c78a8"
+                            },
+                            "fill": {
+                                "value": "transparent"
+                            },
                             "opacity": {
                                 "value": 0.7
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 },
                 {
                     "name": "voronoi",

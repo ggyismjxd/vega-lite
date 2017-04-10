@@ -241,7 +241,10 @@
                                         "value": "circle"
                                     }
                                 }
-                            }
+                            },
+                            "transform": [
+                                null
+                            ]
                         }
                     ],
                     "axes": [

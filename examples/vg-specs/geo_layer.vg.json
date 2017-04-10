@@ -25,21 +25,28 @@
     "data": [
         {
             "name": "source",
-            "url": "data/airports.json",
             "format": {
-                "type": "json",
                 "parse": {}
             },
             "transform": []
         },
         {
             "name": "layer_0_source",
-            "source": "source",
+            "url": "data/us-10m.json",
+            "format": {
+                "type": "topojson",
+                "feature": "counties",
+                "parse": {}
+            },
             "transform": []
         },
         {
             "name": "layer_1_source",
-            "source": "source",
+            "url": "data/airports.json",
+            "format": {
+                "type": "json",
+                "parse": {}
+            },
             "transform": []
         },
         {
@@ -81,6 +88,16 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "layer_0_projection",
+                    "type": "albersUsa"
+                },
+                {
+                    "name": "layer_1_projection",
+                    "type": "albersUsa"
+                }
+            ],
             "marks": [
                 {
                     "name": "layer_0_marks",
@@ -99,11 +116,13 @@
                             }
                         }
                     },
-                    "transform": {
-                        "type": "geoshape",
-                        "projection": "layer_0_projection",
-                        "as": "shape"
-                    }
+                    "transform": [
+                        {
+                            "type": "geoshape",
+                            "projection": "layer_0_projection",
+                            "as": "shape"
+                        }
+                    ]
                 },
                 {
                     "name": "layer_1_marks",
@@ -114,14 +133,8 @@
                     },
                     "encode": {
                         "update": {
-                            "x": {
-                                "scale": "x",
-                                "field": "longitude"
-                            },
-                            "y": {
-                                "scale": "y",
-                                "field": "latitude"
-                            },
+                            "field": "latitude",
+                            "type": "latitude",
                             "fill": {
                                 "value": "#4c78a8"
                             },
@@ -133,96 +146,50 @@
                             }
                         }
                     },
-                    "transform": {
-                        "type": "geopoint",
-                        "projection": "layer_1_projection",
-                        "as": [
-                            "x",
-                            "y"
-                        ],
-                        "fields": [
-                            "longitude",
-                            "latitude"
-                        ]
-                    }
-                }
-            ],
-            "scales": [
-                {
-                    "name": "x",
-                    "type": "linear",
-                    "domain": {
-                        "data": "layer_1_source",
-                        "field": "longitude"
-                    },
-                    "range": [
-                        0,
-                        200
-                    ],
-                    "round": true,
-                    "nice": true,
-                    "zero": true
-                },
-                {
-                    "name": "y",
-                    "type": "linear",
-                    "domain": {
-                        "data": "layer_1_source",
-                        "field": "latitude"
-                    },
-                    "range": [
-                        200,
-                        0
-                    ],
-                    "round": true,
-                    "nice": true,
-                    "zero": true
-                }
-            ],
-            "projections": [
-                {
-                    "name": "layer_0_projection",
-                    "type": "albersUsa"
-                },
-                {
-                    "name": "layer_1_projection",
-                    "type": "albersUsa"
+                    "transform": [
+                        {
+                            "type": "geopoint",
+                            "projection": "layer_1_projection",
+                            "as": [
+                                "x",
+                                "y"
+                            ],
+                            "fields": [
+                                "longitude",
+                                "latitude"
+                            ]
+                        }
+                    ]
                 }
             ],
             "axes": [
                 {
-                    "scale": "x",
                     "orient": "bottom",
                     "tickCount": 5,
                     "title": "longitude",
                     "zindex": 1
                 },
                 {
-                    "scale": "x",
                     "domain": false,
                     "grid": true,
                     "labels": false,
                     "orient": "bottom",
                     "tickCount": 5,
                     "ticks": false,
-                    "zindex": 0,
-                    "gridScale": "y"
+                    "zindex": 0
                 },
                 {
-                    "scale": "y",
                     "orient": "left",
                     "title": "latitude",
                     "zindex": 1
                 },
                 {
-                    "scale": "y",
                     "domain": false,
                     "grid": true,
                     "labels": false,
                     "orient": "left",
                     "ticks": false,
-                    "zindex": 0,
-                    "gridScale": "x"
+                    "zindex": 0
                 }
             ]
         }

@@ -199,6 +199,24 @@
                     }
                 }
             },
+            "projections": [
+                {
+                    "name": "layer_0_projection",
+                    "type": "mercator"
+                },
+                {
+                    "name": "layer_1_projection",
+                    "type": "mercator"
+                },
+                {
+                    "name": "layer_2_projection",
+                    "type": "mercator"
+                },
+                {
+                    "name": "layer_3_projection",
+                    "type": "mercator"
+                }
+            ],
             "marks": [
                 {
                     "name": "layer_0_marks",
@@ -301,17 +319,20 @@
                                 "scale": "y",
                                 "field": "age"
                             },
+                            "size": {
+                                "value": 2
+                            },
                             "stroke": {
                                 "value": "#4c78a8"
                             },
                             "fill": {
                                 "value": "transparent"
-                            },
-                            "size": {
-                                "value": 2
                             }
                         }
-                    }
+                    },
+                    "transform": [
+                        null
+                    ]
                 }
             ],
             "scales": [

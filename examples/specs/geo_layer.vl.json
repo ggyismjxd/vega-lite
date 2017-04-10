@@ -1,12 +1,16 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
-  "data": {
-    "url": "data/airports.json"
-  },
   "projection": {
     "type": "albersUsa"
   },
   "layer": [{
+      "data": {
+        "url": "data/us-10m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "counties"
+        }
+      },
       "mark": "geoshape",
       "encoding": {
         "color": {
@@ -18,6 +22,9 @@
       }
     },
     {
+      "data": {
+        "url": "data/airports.json"
+      },
       "mark": "circle",
       "encoding": {
         "x": {

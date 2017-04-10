@@ -25,9 +25,10 @@
     "data": [
         {
             "name": "source",
-            "url": "data/airports.csv",
+            "url": "data/us-10m.json",
             "format": {
-                "type": "csv",
+                "type": "topojson",
+                "feature": "counties",
                 "parse": {}
             },
             "transform": []
@@ -216,11 +217,13 @@
                                     }
                                 }
                             },
-                            "transform": {
-                                "type": "geoshape",
-                                "projection": "child_projection",
-                                "as": "shape"
-                            }
+                            "transform": [
+                                {
+                                    "type": "geoshape",
+                                    "projection": "child_projection",
+                                    "as": "shape"
+                                }
+                            ]
                         }
                     ]
                 }

@@ -265,7 +265,10 @@
                                         "value": 0.7
                                     }
                                 }
-                            }
+                            },
+                            "transform": [
+                                null
+                            ]
                         }
                     ],
                     "axes": [
