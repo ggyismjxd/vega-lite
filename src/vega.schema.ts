@@ -208,6 +208,13 @@ export interface VgAggregateTransform {
   drop?: boolean;
 }
 
+export interface VgGeoPointTransform {
+  type: 'geopoint';
+  projection: string; // the name of the projection
+  fields: VgFieldRef[];
+  as?: string[];
+}
+
 export interface VgAxisEncode {
   ticks?: VgGuideEncode;
   labels?: VgGuideEncode;
@@ -226,14 +233,7 @@ export interface VgLegendEncode {
 
 export type VgGuideEncode = any; // TODO: replace this (See guideEncode in Vega Schema)
 
-export type VgTransform = VgBinTransform | VgExtentTransform | VgFormulaTransform | VgAggregateTransform | VgFilterTransform | VgImputeTransform | VgStackTransform;
-
-export interface VgGeoPointTransform {
-  type: 'geopoint';
-  projection: string; // the name of the projection
-  fields: VgFieldRef[];
-  as?: string[];
-}
+export type VgTransform = VgBinTransform | VgExtentTransform | VgFormulaTransform | VgAggregateTransform | VgFilterTransform | VgImputeTransform | VgStackTransform | VgGeoPointTransform;
 
 export interface VgGeoShapeTransform {
   type: 'geoshape';
@@ -242,9 +242,8 @@ export interface VgGeoShapeTransform {
   as?: string;
 }
 
-export type VgGeoTransform = VgGeoPointTransform | VgGeoShapeTransform;
-
-export type VgMarkTransform = VgGeoTransform; /* TODO: add labeling, maybe geopath */
+export type VgPostEncodingTransform = VgGeoShapeTransform | VgGeoPointTransform; /* TODO: add labeling, maybe geopath */
+/* TODO: REMOVE GEO POINT ITS NOT A POST ENCODING */
 
 export interface VgStackTransform {
   type: 'stack';
