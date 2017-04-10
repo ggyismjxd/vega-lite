@@ -215,11 +215,6 @@ export abstract class Model {
       group.signals = signals;
     }
 
-    const projections = this.assembleProjections();
-    if (projections.length > 0) {
-      group.projections = projections;
-    }
-
     // TODO: consider if we want scales to come before marks in the output spec.
     group.marks = this.assembleMarks();
 

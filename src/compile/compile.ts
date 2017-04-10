@@ -52,6 +52,7 @@ function getTopLevelProperties(topLevelSpec: TopLevel<any>, config: Config) {
 
 function assemble(model: Model, topLevelProperties: TopLevelProperties) {
   // TODO: change type to become VgSpec
+  const projections = model.assembleProjections();
   const output = extend(
     {
       $schema: 'http://vega.github.io/schema/vega/v3.0.json',
@@ -70,7 +71,8 @@ function assemble(model: Model, topLevelProperties: TopLevelProperties) {
           update: "data('layout')[0].height"
         }
       ].concat(assembleTopLevelSignals(model))
-    },{
+    }, {
+      ...projections.length > 0 ? {projection: projections} : {},
       data: [].concat(
         model.assembleData([]),
         model.assembleLayout([]),
