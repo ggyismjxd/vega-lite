@@ -11,7 +11,7 @@ import {Scale} from './scale';
 import {SortField, SortOrder} from './sort';
 import {StackOffset} from './stack';
 import {isDiscreteByDefault, TimeUnit} from './timeunit';
-import {getFullName, LATITUDE, LONGITUDE, Type} from './type';
+import {getFullName, LATITUDE, LONGITUDE, NOMINAL, ORDINAL, QUANTITATIVE, TEMPORAL, Type} from './type';
 
 /**
  * Definition object for a constant value of an encoding channel.
@@ -194,15 +194,15 @@ export function isProjection(fieldDef: FieldDef) {
 
 export function isDiscrete(fieldDef: FieldDef) {
   switch (fieldDef.type) {
-    case 'nominal':
-    case 'ordinal':
+    case NOMINAL:
+    case ORDINAL:
       return true;
-    case 'latitude':
-    case 'longitude':
+    case LATITUDE:
+    case LONGITUDE:
       return false;
-    case 'quantitative':
+    case QUANTITATIVE:
       return !!fieldDef.bin;
-    case 'temporal':
+    case TEMPORAL:
       // TODO: deal with custom scale type case.
       return isDiscreteByDefault(fieldDef.timeUnit);
   }
@@ -234,20 +234,20 @@ export function title(fieldDef: FieldDef, config: Config) {
 
 export function defaultType(fieldDef: FieldDef, channel: Channel): Type {
   if (!!fieldDef.timeUnit) {
-    return 'temporal';
+    return TEMPORAL;
   }
   if (!!fieldDef.bin) {
-    return 'quantitative';
+    return QUANTITATIVE;
   }
   switch (rangeType(channel)) {
     case 'continuous':
-      return 'quantitative';
+      return QUANTITATIVE;
     case 'discrete':
-      return 'nominal';
+      return NOMINAL;
     case 'flexible': // color
-      return 'nominal';
+      return NOMINAL;
     default:
-      return 'quantitative';
+      return QUANTITATIVE;
   }
 }
 
@@ -324,7 +324,7 @@ export function channelCompatibility(fieldDef: FieldDef, channel: Channel): {com
       return COMPATIBLE;
 
     case 'shape':
-      if (fieldDef.type !== 'nominal') {
+      if (fieldDef.type !== NOMINAL) {
         return {
           compatible: false,
           warning: 'Shape channel should be used with nominal data only'
@@ -333,7 +333,7 @@ export function channelCompatibility(fieldDef: FieldDef, channel: Channel): {com
       return COMPATIBLE;
 
     case 'order':
-      if (fieldDef.type === 'nominal') {
+      if (fieldDef.type === NOMINAL) {
         return {
           compatible: false,
           warning: `Channel order is inappropriate for nominal field, which has no inherent order.`

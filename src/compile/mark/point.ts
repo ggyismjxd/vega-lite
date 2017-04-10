@@ -12,16 +12,27 @@ import {contains, keys} from '../../util';
 import {VgGeoPointTransform} from '../../vega.schema';
 
 function encodeEntry(model: UnitModel, fixedShape?: 'circle' | 'square') {
-  const {config, width, height} = model;
+  const {config, encoding, width, height} = model;
 
-  return {
-    ...mixins.pointPosition('x', model, ref.midX(width, config)),
-    ...mixins.pointPosition('y', model, ref.midY(height, config)),
+  const x = encoding['x'] as FieldDef;
+  const y = encoding['y'] as FieldDef;
+  const isProjection = isFieldDef(x) && contains([LONGITUDE, LATITUDE], x.type) || isFieldDef(y) && contains([LONGITUDE, LATITUDE], y.type);
 
+  const shared = {
     ...mixins.color(model),
-    ...mixins.nonPosition('size', model),
     ...shapeMixins(model, config, fixedShape),
     ...mixins.nonPosition('opacity', model)
+  };
+
+  return isProjection ? {
+    ...x,
+    ...y,
+    ...shared
+  } : {
+    ...mixins.pointPosition('x', model, ref.midX(width, config)),
+    ...mixins.pointPosition('y', model, ref.midY(height, config)),
+    ...mixins.nonPosition('size', model),
+    ...shared
   };
 }
 
