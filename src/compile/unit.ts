@@ -4,7 +4,7 @@ import {CellConfig, Config} from '../config';
 import {SOURCE, SUMMARY} from '../data';
 import {Encoding, normalizeEncoding} from '../encoding';
 import * as vlEncoding from '../encoding'; // TODO: remove
-import {field, FieldDef, FieldRefOption, isFieldDef} from '../fielddef';
+import {field, FieldDef, FieldRefOption, isFieldDef, isProjection} from '../fielddef';
 import {Legend} from '../legend';
 import {FILL_STROKE_CONFIG, isMarkDef, Mark, MarkDef, TEXT as TEXT_MARK} from '../mark';
 import {Projection} from '../projection';
@@ -187,11 +187,11 @@ export class UnitModel extends Model {
   private initAxes(encoding: Encoding): Dict<Axis> {
     return [X, Y].reduce(function(_axis, channel) {
       // Position Axis
-
       const channelDef = encoding[channel];
-      if (isFieldDef(channelDef) ||
+      if ((isFieldDef(channelDef) ||
           (channel === X && isFieldDef(encoding.x2)) ||
-          (channel === Y && isFieldDef(encoding.y2))) {
+          (channel === Y && isFieldDef(encoding.y2))
+        ) && !isProjection(channelDef)) {
 
         const axisSpec = isFieldDef(channelDef) ? channelDef.axis : null;
 

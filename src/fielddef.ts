@@ -189,7 +189,7 @@ export function field(fieldDef: FieldDef, opt: FieldRefOption = {}) {
 }
 
 export function isProjection(fieldDef: FieldDef) {
-  return fieldDef.type === LATITUDE || fieldDef.type === LONGITUDE;
+  return isFieldDef(fieldDef) && (fieldDef.type === LATITUDE || fieldDef.type === LONGITUDE);
 }
 
 export function isDiscrete(fieldDef: FieldDef) {

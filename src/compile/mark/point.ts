@@ -6,7 +6,7 @@ import {getMarkConfig} from '../common';
 import {MarkCompiler} from './base';
 import * as ref from './valueref';
 
-import {FieldDef, isFieldDef} from '../../fielddef';
+import {FieldDef, isFieldDef, isProjection} from '../../fielddef';
 import {LATITUDE, LONGITUDE} from '../../type';
 import {contains, keys} from '../../util';
 import {VgGeoPointTransform} from '../../vega.schema';
@@ -14,23 +14,30 @@ import {VgGeoPointTransform} from '../../vega.schema';
 function encodeEntry(model: UnitModel, fixedShape?: 'circle' | 'square') {
   const {config, encoding, width, height} = model;
 
-  const x = encoding['x'] as FieldDef;
-  const y = encoding['y'] as FieldDef;
-  const isProjection = isFieldDef(x) && contains([LONGITUDE, LATITUDE], x.type) || isFieldDef(y) && contains([LONGITUDE, LATITUDE], y.type);
-
   const shared = {
     ...mixins.color(model),
     ...shapeMixins(model, config, fixedShape),
     ...mixins.nonPosition('opacity', model)
   };
 
-  return isProjection ? {
-    ...x,
-    ...y,
-    ...shared
-  } : {
-    ...mixins.pointPosition('x', model, ref.midX(width, config)),
-    ...mixins.pointPosition('y', model, ref.midY(height, config)),
+  const x = encoding.x;
+  const y = encoding.y;
+  let coordinates = {};
+
+  if (isProjection(x) || isProjection(y)) {
+    coordinates = {
+      x: x,
+      y: y
+    };
+  } else {
+    coordinates = {
+      x: mixins.pointPosition('x', model, ref.midX(width, config)),
+      y: mixins.pointPosition('y', model, ref.midY(height, config))
+    };
+  }
+
+  return {
+    ...coordinates,
     ...mixins.nonPosition('size', model),
     ...shared
   };

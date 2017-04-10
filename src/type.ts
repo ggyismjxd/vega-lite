@@ -51,7 +51,6 @@ export function getFullName(type: Type|string): Type {
       case 'n':
       case NOMINAL:
         return 'nominal';
-
       case LATITUDE:
         return 'latitude';
       case LONGITUDE:
