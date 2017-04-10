@@ -1,9 +1,8 @@
 import {UnitModel} from '../unit';
 import * as mixins from './mixins';
 
+import {VgPostEncodingTransform} from '../../vega.schema';
 import {MarkCompiler} from './base';
-
-import {VgGeoShapeTransform} from '../../vega.schema';
 
 export const geoshape: MarkCompiler = {
   vgMark: 'shape',
@@ -14,12 +13,13 @@ export const geoshape: MarkCompiler = {
       ...mixins.nonPosition('opacity', model)
     };
   },
-  transform: (model: UnitModel): VgGeoShapeTransform => {
+  postEncodingTransform: (model: UnitModel): VgPostEncodingTransform[] => {
     // TODO: add support for field
-    return {
+    return [{
       type: 'geoshape',
       projection: model.getName('projection'),
-      as: 'shape'
-    } as VgGeoShapeTransform;
+      as: 'shape',
+      field:
+    } as VgPostEncodingTransform];
   }
 };

@@ -1,4 +1,4 @@
-import {VgEncodeEntry, VgMarkTransform} from '../../vega.schema';
+import {VgEncodeEntry, VgPostEncodingTransform} from '../../vega.schema';
 import {UnitModel} from '../unit';
 
 /**
@@ -18,7 +18,8 @@ export interface MarkCompiler {
   encodeEntry: (model: UnitModel) => VgEncodeEntry;
 
   /**
-   * Transform on a mark, used for layout (labeling) and projections
+   * Transform on a mark after render, used for layout (labeling) and projections
    */
-  transform?: (model: UnitModel) => VgMarkTransform;
+  postEncodingTransform?: (model: UnitModel) => VgPostEncodingTransform[];
+
 }
