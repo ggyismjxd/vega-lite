@@ -66,7 +66,7 @@ function parsePathMark(model: UnitModel) {
       // FIXME: support sorting path order (in connected scatterplot)
       from: {data: (details.length > 0 ? FACETED_PATH_PREFIX : '') + dataFrom(model)},
       encode: {update: markCompiler[mark].encodeEntry(model)},
-      ...(transform ? {transform: [transform(model)]} : {})
+      transform: transform ? [transform(model)] : []
     }
   ];
 
@@ -89,7 +89,7 @@ function parsePathMark(model: UnitModel) {
           height: {field: {group: 'height'}}
         }
       },
-      ...(transform ? {transform: [transform(model)]} : {}),
+      transform: transform ? [transform(model)] : [],
       marks: pathMarks
     }];
   } else {
@@ -113,7 +113,7 @@ function parseNonPathMark(model: UnitModel) {
     ...(role? {role} : {}),
     from: {data: dataFrom(model)},
     encode: {update: markCompiler[mark].encodeEntry(model)},
-    ...(transform ? {transform: [transform(model)]} : {}),
+    transform: transform ? [transform(model)] : [],
   });
 
   return marks;
