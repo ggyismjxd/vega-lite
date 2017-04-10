@@ -11,7 +11,7 @@ import {Scale} from './scale';
 import {SortField, SortOrder} from './sort';
 import {StackOffset} from './stack';
 import {isDiscreteByDefault, TimeUnit} from './timeunit';
-import {getFullName, Type} from './type';
+import {getFullName, LATITUDE, LONGITUDE, Type} from './type';
 
 /**
  * Definition object for a constant value of an encoding channel.
@@ -186,6 +186,10 @@ export function field(fieldDef: FieldDef, opt: FieldRefOption = {}) {
   }
 
   return field;
+}
+
+export function isProjection(fieldDef: FieldDef) {
+  return fieldDef.type === LATITUDE || fieldDef.type === LONGITUDE;
 }
 
 export function isDiscrete(fieldDef: FieldDef) {

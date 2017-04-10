@@ -12,7 +12,8 @@ import {hasDiscreteDomain, Scale} from '../scale';
 import {SelectionDef} from '../selection';
 import {UnitSpec} from '../spec';
 import {stack, StackProperties} from '../stack';
-import {Dict, duplicate, extend} from '../util';
+import {LATITUDE, LONGITUDE} from '../type';
+import {contains, Dict, duplicate, extend} from '../util';
 import {VgData} from '../vega.schema';
 
 import {parseAxisComponent} from './axis/parse';
@@ -122,10 +123,11 @@ export class UnitModel extends Model {
     const xyRangeSteps: number[] = [];
 
     return UNIT_SCALE_CHANNELS.reduce((scales, channel) => {
-      if (vlEncoding.channelHasField(encoding, channel) ||
-          (channel === X && vlEncoding.channelHasField(encoding, X2)) ||
-          (channel === Y && vlEncoding.channelHasField(encoding, Y2))
-        ) {
+      const channelToTest = channel === X ? X2 :
+                            channel === Y ? Y2 :
+                            channel;
+
+      if (vlEncoding.channelHasField(encoding, channelToTest) && !vlEncoding.channelIsProjection(encoding, channelToTest)) {
         const scale = scales[channel] = initScale(
           channel, encoding[channel], this.config, mark,
           channel === X ? topLevelWidth : channel === Y ? topLevelHeight : undefined,

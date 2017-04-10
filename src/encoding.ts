@@ -1,7 +1,7 @@
 // utility for encoding mapping
 import {Channel, CHANNELS, supportMark} from './channel';
 import {Facet} from './facet';
-import {ChannelDef, ConditionalValueDef, FieldDef, isFieldDef, isValueDef, LegendFieldDef, normalize, OrderFieldDef, PositionFieldDef, TextFieldDef, ValueDef} from './fielddef';
+import {ChannelDef, ConditionalValueDef, FieldDef, isFieldDef, isProjection, isValueDef, LegendFieldDef, normalize, OrderFieldDef, PositionFieldDef, TextFieldDef, ValueDef} from './fielddef';
 import * as log from './log';
 import {Mark} from './mark';
 import {isArray, some} from './util';
@@ -89,6 +89,11 @@ export function channelHasField(encoding: EncodingWithFacet, channel: Channel): 
     }
   }
   return false;
+}
+
+export function channelIsProjection(encoding: EncodingWithFacet, channel: Channel) {
+  const channelDef = encoding && encoding[channel];
+  return channelDef && isFieldDef(channelDef) && isProjection(channelDef);
 }
 
 export function isAggregate(encoding: EncodingWithFacet) {
