@@ -110,15 +110,12 @@ export interface GenericFacetSpec<U extends GenericUnitSpec<any, any>> extends B
 }
 
 export type FacetSpec = GenericFacetSpec<UnitSpec>;
-export type ExtendedFacetSpec = GenericFacetSpec<FacetedUnitSpec>;
 
 export type GenericSpec<U extends GenericUnitSpec<any, any>> = U | GenericLayerSpec<U> | GenericFacetSpec<U>;
 
-export type ExtendedSpec = GenericSpec<FacetedUnitSpec>;
-
 export type Spec = GenericSpec<UnitSpec>;
 
-export type TopLevelExtendedSpec = TopLevel<ExtendedSpec>;
+export type TopLevelExtendedSpec = TopLevel<FacetedUnitSpec> | TopLevel<GenericLayerSpec<LayeredUnitSpec>> | TopLevel<GenericFacetSpec<LayeredUnitSpec>>;
 
 /* Custom type guards */
 
@@ -127,11 +124,11 @@ export function isFacetSpec(spec: GenericSpec<GenericUnitSpec<any, any>>): spec 
   return spec['facet'] !== undefined;
 }
 
-export function isUnitSpec(spec: ExtendedSpec | Spec): spec is FacetedUnitSpec | UnitSpec {
+export function isUnitSpec(spec: GenericSpec<GenericUnitSpec<any, any>>): spec is FacetedUnitSpec | UnitSpec {
   return !!spec['mark'];
 }
 
-export function isLayerSpec(spec: ExtendedSpec | Spec): spec is GenericLayerSpec<GenericUnitSpec<any, Encoding>> {
+export function isLayerSpec(spec: GenericSpec<GenericUnitSpec<any, any>>): spec is GenericLayerSpec<GenericUnitSpec<any, any>> {
   return spec['layer'] !== undefined;
 }
 
@@ -139,7 +136,7 @@ export function isLayerSpec(spec: ExtendedSpec | Spec): spec is GenericLayerSpec
  * Decompose extended unit specs into composition of pure unit specs.
  */
 // TODO: consider moving this to another file.  Maybe vl.spec.normalize or vl.normalize
-export function normalize(spec: TopLevel<ExtendedSpec>): Spec {
+export function normalize(spec: TopLevelExtendedSpec): Spec {
   if (isFacetSpec(spec)) {
     return normalizeFacet(spec, spec.config);
   }
@@ -319,7 +316,7 @@ function accumulate(dict: any, fieldDefs: FieldDef[]): any {
 }
 
 /* Recursively get fieldDefs from a spec, returns a dictionary of fieldDefs */
-function fieldDefIndex(spec: ExtendedSpec | ExtendedFacetSpec, dict: any = {}): any {
+function fieldDefIndex(spec: GenericSpec<GenericUnitSpec<any, any>>, dict: any = {}): any {
   // TODO: Support repeat and concat
   if (isLayerSpec(spec)) {
     spec.layer.forEach(function(layer) {
@@ -339,7 +336,7 @@ function fieldDefIndex(spec: ExtendedSpec | ExtendedFacetSpec, dict: any = {}): 
 }
 
 /* Returns all non-duplicate fieldDefs in a spec in a flat array */
-export function fieldDefs(spec: ExtendedSpec | ExtendedFacetSpec): FieldDef[] {
+export function fieldDefs(spec: GenericSpec<GenericUnitSpec<any, any>>): FieldDef[] {
   return vals(fieldDefIndex(spec));
 }
 
