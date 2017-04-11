@@ -6,6 +6,8 @@ export interface TopLevelProperties {
 
   /**
    * CSS color property to use as background of visualization. Default is `"transparent"`.
+   *
+   * __Default value:__ (none)
    */
   background?: string;
 

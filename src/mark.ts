@@ -84,11 +84,12 @@ export interface MarkDef {
    * - `"cardinal-closed"`: a closed Cardinal spline, as in a loop.
    * - `"bundle"`: equivalent to basis, except the tension parameter is used to straighten the spline.
    * - `"monotone"`: cubic interpolation that preserves monotonicity in y.
+   * For more information about each interpolation method, please see [D3's line interpolation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate).
    */
   interpolate?: Interpolate;
 
   /**
-   * Depending on the interpolation type, sets the tension parameter (for line and area marks).
+   * Depending on the interpolation type, sets the tension parameter (for line and area marks).(See [D3's line interpolation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate).)
    * @minimum 0
    * @maximum 1
    */
@@ -119,12 +120,19 @@ export interface MarkConfig extends VgMarkConfig {
   /**
    * Whether the mark's color should be used as fill color instead of stroke color.
    * All marks except "point", "line", and "rule" are filled by default.
+   *
+   * __Default value:__ `true` for all marks except `point` and `false` for `point`.
+   *
+   * __Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.
+   *
    */
   filled?: boolean;
 
   // TODO: remove this once we correctly integrate theme
   /**
    * Default color.
+   *
+   * __Default value:__ <span style="color: #4682b4;">&#9632;</span> blue (`""#4682b4"`)
    */
   color?: string;
 }
