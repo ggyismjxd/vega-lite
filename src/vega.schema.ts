@@ -739,7 +739,7 @@ export interface VgMarkConfig {
   angle?: number;
 
   /**
-   * The vertical alignment of the text. One of `top`, `middle`, `bottom`.
+   * The vertical alignment of the text. One of `"top"`, `"middle"`, `"bottom"`.
    *
    * __Default value:__ `"middle"`
    *
