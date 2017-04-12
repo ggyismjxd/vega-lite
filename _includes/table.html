@@ -44,11 +44,11 @@
 
       <!--check if prop is a link or not.-->
       {% capture propWithLink %}
-          {% include checkLink.html check="prop" channel="Axis" param=prop %}
+          {% include checkLink.html check="prop" channel=include.source param=prop %}
       {% endcapture %}
 
       {% capture typeWithLink %}
-        {% include checkLink.html check="type" channel="Axis" param=type %}
+        {% include checkLink.html check="type" channel=include.source param=type %}
       {% endcapture %}
 
       <tr>
