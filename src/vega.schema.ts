@@ -292,8 +292,6 @@ export interface VgAxisBase {
    *
    * __Default value:__  derived from [axis config](config.html#axis-config)'s `tickSize` (`6` by default).
    *
-   * __Default value:__ `2/3*rangeStep` (This will provide offset between band equals to the width of the tick.)
-   *
    * @minimum 0
    */
   tickSize?: number;
@@ -729,7 +727,7 @@ export interface VgMarkConfig {
   // Text / Label Mark Config
 
   /**
-   * The horizontal alignment of the text. One of `left`, `right`, `center`.
+   * The horizontal alignment of the text. One of `"left"`, `"right"`, `"center"`.
    */
   align?: HorizontalAlign;
 
@@ -767,7 +765,7 @@ export interface VgMarkConfig {
   theta?: number;
 
   /**
-   * The typeface to set the text in (e.g., `Helvetica Neue`).
+   * The typeface to set the text in (e.g., `"Helvetica Neue"`).
    * @minimum 0
    */
   font?: string;
@@ -779,16 +777,16 @@ export interface VgMarkConfig {
   fontSize?: number;
 
   /**
-   * The font style (e.g., `italic`).
+   * The font style (e.g., `"italic"`).
    */
   fontStyle?: FontStyle;
   /**
-   * The font weight (e.g., `bold`).
+   * The font weight (e.g., `"bold"`).
    */
   fontWeight?: FontWeight | FontWeightNumber;
 
   /**
-   * Placeholder text if the `text` channel is not specified (`"Abc"` by default).
+   * Placeholder text if the `text` channel is not specified
    */
   text?: string;
 }

@@ -119,7 +119,6 @@ export interface MarkConfig extends VgMarkConfig {
   // ---------- Color ----------
   /**
    * Whether the mark's color should be used as fill color instead of stroke color.
-   * All marks except "point", "line", and "rule" are filled by default.
    *
    * __Default value:__ `true` for all marks except `point` and `false` for `point`.
    *
@@ -132,7 +131,7 @@ export interface MarkConfig extends VgMarkConfig {
   /**
    * Default color.
    *
-   * __Default value:__ <span style="color: #4682b4;">&#9632;</span> blue (`""#4682b4"`)
+   * __Default value:__ <span style="color: #4682b4;">&#9632;</span> `"#4682b4"`
    */
   color?: string;
 }

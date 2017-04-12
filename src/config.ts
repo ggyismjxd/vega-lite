@@ -11,7 +11,7 @@ import {VgRangeScheme} from './vega.schema';
 
 export interface CellConfig {
   /**
-   * The default width of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) x-scale or ordinal x-scale with `rangeStep` = `"fit"`.
+   * The default width of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) x-scale or ordinal x-scale with `rangeStep` = `null`.
    *
    * __Default value:__ `200`
    *
@@ -19,7 +19,7 @@ export interface CellConfig {
   width?: number;
 
   /**
-   * The default height of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) y-scale with `rangeStep` = `"fit"`.
+   * The default height of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) y-scale with `rangeStep` = `null`.
    *
    * __Default value:__ `200`
    *
