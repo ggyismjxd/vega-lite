@@ -10,7 +10,7 @@
                     "type": "string"
                 },
                 "background": {
-                    "description": "CSS color property to use as background of visualization. Default is `\"transparent\"`.\n\n__Default value:__ (none)",
+                    "description": "CSS color property to use as background of visualization.\n\n__Default value:__ none (transparent)",
                     "type": "string"
                 },
                 "config": {
@@ -124,7 +124,7 @@
                     "type": "string"
                 },
                 "background": {
-                    "description": "CSS color property to use as background of visualization. Default is `\"transparent\"`.\n\n__Default value:__ (none)",
+                    "description": "CSS color property to use as background of visualization.\n\n__Default value:__ none (transparent)",
                     "type": "string"
                 },
                 "config": {
@@ -223,7 +223,7 @@
                     "type": "string"
                 },
                 "background": {
-                    "description": "CSS color property to use as background of visualization. Default is `\"transparent\"`.\n\n__Default value:__ (none)",
+                    "description": "CSS color property to use as background of visualization.\n\n__Default value:__ none (transparent)",
                     "type": "string"
                 },
                 "config": {
@@ -415,7 +415,7 @@
                     "type": "integer"
                 },
                 "tickSize": {
-                    "description": "The size, in pixels, of major, minor and end ticks.\n\n__Default value:__  derived from [axis config](config.html#axis-config)'s `tickSize` (`6` by default).\n\n__Default value:__ `2/3*rangeStep` (This will provide offset between band equals to the width of the tick.)",
+                    "description": "The size, in pixels, of major, minor and end ticks.\n\n__Default value:__  derived from [axis config](config.html#axis-config)'s `tickSize` (`6` by default).",
                     "minimum": 0,
                     "type": "number"
                 },
@@ -547,7 +547,7 @@
                     "type": "string"
                 },
                 "tickSize": {
-                    "description": "The size, in pixels, of major, minor and end ticks.\n\n__Default value:__  derived from [axis config](config.html#axis-config)'s `tickSize` (`6` by default).\n\n__Default value:__ `2/3*rangeStep` (This will provide offset between band equals to the width of the tick.)",
+                    "description": "The size, in pixels, of major, minor and end ticks.\n\n__Default value:__  derived from [axis config](config.html#axis-config)'s `tickSize` (`6` by default).",
                     "minimum": 0,
                     "type": "number"
                 },
@@ -610,7 +610,7 @@
             "properties": {
                 "align": {
                     "$ref": "#/definitions/HorizontalAlign",
-                    "description": "The horizontal alignment of the text. One of `left`, `right`, `center`."
+                    "description": "The horizontal alignment of the text. One of `\"left\"`, `\"right\"`, `\"center\"`."
                 },
                 "angle": {
                     "description": "The rotation angle of the text, in degrees.",
@@ -620,19 +620,19 @@
                 },
                 "baseline": {
                     "$ref": "#/definitions/VerticalAlign",
-                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`."
+                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`.\n\n__Default value:__ `\"middle\"`"
                 },
                 "binSpacing": {
-                    "description": "Offset between bar for binned field.  Ideal value for this is either 0 (Preferred by statisticians) or 1 (Vega-Lite Default, D3 example style).",
+                    "description": "Offset between bar for binned field.  Ideal value for this is either 0 (Preferred by statisticians) or 1 (Vega-Lite Default, D3 example style).\n\n__Default value:__ 1",
                     "minimum": 0,
                     "type": "number"
                 },
                 "color": {
-                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> blue (`\"\"#4682b4\"`)",
+                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> `\"#4682b4\"`",
                     "type": "string"
                 },
                 "continuousBandSize": {
-                    "description": "Default size of the bars on continuous scales.",
+                    "description": "Default size of the bars on continuous scales.\n\n__Default value:__ 2",
                     "minimum": 0,
                     "type": "number"
                 },
@@ -660,11 +660,11 @@
                     "type": "number"
                 },
                 "filled": {
-                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\nAll marks except \"point\", \"line\", and \"rule\" are filled by default.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
+                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
                     "type": "boolean"
                 },
                 "font": {
-                    "description": "The typeface to set the text in (e.g., `Helvetica Neue`).",
+                    "description": "The typeface to set the text in (e.g., `\"Helvetica Neue\"`).",
                     "minimum": 0,
                     "type": "string"
                 },
@@ -675,7 +675,7 @@
                 },
                 "fontStyle": {
                     "$ref": "#/definitions/FontStyle",
-                    "description": "The font style (e.g., `italic`)."
+                    "description": "The font style (e.g., `\"italic\"`)."
                 },
                 "fontWeight": {
                     "anyOf": [
@@ -690,7 +690,7 @@
                             "type": "number"
                         }
                     ],
-                    "description": "The font weight (e.g., `bold`)."
+                    "description": "The font weight (e.g., `\"bold\"`)."
                 },
                 "interpolate": {
                     "$ref": "#/definitions/Interpolate",
@@ -753,7 +753,7 @@
                     "type": "number"
                 },
                 "text": {
-                    "description": "Placeholder text if the `text` channel is not specified (`\"Abc\"` by default).",
+                    "description": "Placeholder text if the `text` channel is not specified",
                     "type": "string"
                 },
                 "theta": {
@@ -1128,7 +1128,7 @@
                     "type": "number"
                 },
                 "height": {
-                    "description": "The default height of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) y-scale with `rangeStep` = `\"fit\"`.\n\n__Default value:__ `200`",
+                    "description": "The default height of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) y-scale with `rangeStep` = `null`.\n\n__Default value:__ `200`",
                     "type": "number"
                 },
                 "stroke": {
@@ -1155,7 +1155,7 @@
                     "type": "number"
                 },
                 "width": {
-                    "description": "The default width of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) x-scale or ordinal x-scale with `rangeStep` = `\"fit\"`.\n\n__Default value:__ `200`",
+                    "description": "The default width of the single plot or each plot in a trellis plot when the visualization has a continuous (non-ordinal) x-scale or ordinal x-scale with `rangeStep` = `null`.\n\n__Default value:__ `200`",
                     "type": "number"
                 }
             },
@@ -1315,7 +1315,7 @@
                     "description": "Specific axis config for x-axis along the bottom edge of the chart."
                 },
                 "background": {
-                    "description": "CSS color property to use as background of visualization. Default is `\"transparent\"`.\n\n__Default value:__ (none)",
+                    "description": "CSS color property to use as background of visualization.\n\n__Default value:__ none (transparent)",
                     "type": "string"
                 },
                 "bar": {
@@ -2447,7 +2447,7 @@
             "properties": {
                 "align": {
                     "$ref": "#/definitions/HorizontalAlign",
-                    "description": "The horizontal alignment of the text. One of `left`, `right`, `center`."
+                    "description": "The horizontal alignment of the text. One of `\"left\"`, `\"right\"`, `\"center\"`."
                 },
                 "angle": {
                     "description": "The rotation angle of the text, in degrees.",
@@ -2457,10 +2457,10 @@
                 },
                 "baseline": {
                     "$ref": "#/definitions/VerticalAlign",
-                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`."
+                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`.\n\n__Default value:__ `\"middle\"`"
                 },
                 "color": {
-                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> blue (`\"\"#4682b4\"`)",
+                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> `\"#4682b4\"`",
                     "type": "string"
                 },
                 "dx": {
@@ -2482,11 +2482,11 @@
                     "type": "number"
                 },
                 "filled": {
-                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\nAll marks except \"point\", \"line\", and \"rule\" are filled by default.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
+                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
                     "type": "boolean"
                 },
                 "font": {
-                    "description": "The typeface to set the text in (e.g., `Helvetica Neue`).",
+                    "description": "The typeface to set the text in (e.g., `\"Helvetica Neue\"`).",
                     "minimum": 0,
                     "type": "string"
                 },
@@ -2497,7 +2497,7 @@
                 },
                 "fontStyle": {
                     "$ref": "#/definitions/FontStyle",
-                    "description": "The font style (e.g., `italic`)."
+                    "description": "The font style (e.g., `\"italic\"`)."
                 },
                 "fontWeight": {
                     "anyOf": [
@@ -2512,7 +2512,7 @@
                             "type": "number"
                         }
                     ],
-                    "description": "The font weight (e.g., `bold`)."
+                    "description": "The font weight (e.g., `\"bold\"`)."
                 },
                 "interpolate": {
                     "$ref": "#/definitions/Interpolate",
@@ -2575,7 +2575,7 @@
                     "type": "number"
                 },
                 "text": {
-                    "description": "Placeholder text if the `text` channel is not specified (`\"Abc\"` by default).",
+                    "description": "Placeholder text if the `text` channel is not specified",
                     "type": "string"
                 },
                 "theta": {
@@ -2724,7 +2724,7 @@
                     "description": "Type of overlay for area mark (line or linepoint)"
                 },
                 "line": {
-                    "description": "Whether to overlay line with point.",
+                    "description": "Whether to overlay line with point.\n\n__Default value:__ `false`",
                     "type": "boolean"
                 }
             },
@@ -2982,7 +2982,7 @@
             "additionalProperties": false,
             "properties": {
                 "bandPaddingInner": {
-                    "description": "Default inner padding for `x` and `y` band-ordinal scales.",
+                    "description": "Default inner padding for `x` and `y` band-ordinal scales.\n\n__Default value:__ 0.1",
                     "maximum": 1,
                     "minimum": 0,
                     "type": "number"
@@ -2998,7 +2998,7 @@
                     "type": "boolean"
                 },
                 "facetSpacing": {
-                    "description": "Default spacing between faceted plots.",
+                    "description": "Default spacing between faceted plots.\n\n__Default value:__ 16",
                     "minimum": 0,
                     "type": "integer"
                 },
@@ -3008,12 +3008,12 @@
                     "type": "number"
                 },
                 "maxFontSize": {
-                    "description": "The default max value for mapping quantitative fields to text's size/fontSize.\nIf undefined (default), we will use bandSize - 1.",
+                    "description": "The default max value for mapping quantitative fields to text's size/fontSize.\nIf undefined (default), we will use bandSize - 1.\n\n__Default value:__ `40`",
                     "minimum": 0,
                     "type": "number"
                 },
                 "maxOpacity": {
-                    "description": "Default max opacity for mapping a field to opacity.",
+                    "description": "Default max opacity for mapping a field to opacity.\n\n__Default value:__ `0.8`",
                     "maximum": 1,
                     "minimum": 0,
                     "type": "number"
@@ -3024,7 +3024,7 @@
                     "type": "number"
                 },
                 "maxStrokeWidth": {
-                    "description": "Default max strokeWidth for strokeWidth  (or rule/line's size) scale.",
+                    "description": "Default max strokeWidth for strokeWidth  (or rule/line's size) scale.\n\n__Default value:__ `4`",
                     "minimum": 0,
                     "type": "number"
                 },
@@ -3034,28 +3034,28 @@
                     "type": "number"
                 },
                 "minFontSize": {
-                    "description": "The default min value for mapping quantitative fields to tick's size/fontSize scale with zero=false",
+                    "description": "The default min value for mapping quantitative fields to tick's size/fontSize scale with zero=false\n\n__Default value:__ `8`",
                     "minimum": 0,
                     "type": "number"
                 },
                 "minOpacity": {
-                    "description": "Default minimum opacity for mapping a field to opacity.",
+                    "description": "Default minimum opacity for mapping a field to opacity.\n\n__Default value:__ `0.3`",
                     "maximum": 1,
                     "minimum": 0,
                     "type": "number"
                 },
                 "minSize": {
-                    "description": "Default minimum value for point size scale with zero=false.",
+                    "description": "Default minimum value for point size scale with zero=false.\n\n__Default value:__ `9`",
                     "minimum": 0,
                     "type": "number"
                 },
                 "minStrokeWidth": {
-                    "description": "Default minimum strokeWidth for strokeWidth (or rule/line's size) scale with zero=false.",
+                    "description": "Default minimum strokeWidth for strokeWidth (or rule/line's size) scale with zero=false.\n\n__Default value:__ `1`",
                     "minimum": 0,
                     "type": "number"
                 },
                 "pointPadding": {
-                    "description": "Default outer padding for `x` and `y` point-ordinal scales.",
+                    "description": "Default outer padding for `x` and `y` point-ordinal scales.\n\n__Default value:__ `0.5`",
                     "maximum": 1,
                     "minimum": 0,
                     "type": "number"
@@ -3063,7 +3063,7 @@
                 "rangeStep": {
                     "anyOf": [
                         {
-                            "description": "Default range step for (1) `y` ordinal scale,\nand (2) `x` ordinal scale when the mark is not `text`.",
+                            "description": "Default range step for (1) `y` ordinal scale,\nand (2) `x` ordinal scale when the mark is not `text`.\n\n__Default value:__ `21`",
                             "minimum": 0,
                             "type": "number"
                         },
@@ -3077,14 +3077,14 @@
                     "type": "boolean"
                 },
                 "shapes": {
-                    "description": "The default collection of symbol shapes for mapping nominal fields to shapes of point marks (i.e., range of a `shape` scale).\nEach value should be one of: `\"circle\"`, `\"square\"`, `\"cross\"`, `\"diamond\"`, `\"triangle-up\"`, or `\"triangle-down\"`, or a custom SVG path.",
+                    "description": "The default collection of symbol shapes for mapping nominal fields to shapes of point marks (i.e., range of a `shape` scale).\nEach value should be one of: `\"circle\"`, `\"square\"`, `\"cross\"`, `\"diamond\"`, `\"triangle-up\"`, or `\"triangle-down\"`, or a custom SVG path.\n\n__Default value:__ ['\"circle\"', '\"square\"', '\"cross\"', '\"diamond\"', '\"triangle-up\"', '\"triangle-down\"']",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "textXRangeStep": {
-                    "description": "Default range step for `x` ordinal scale when is mark is `text`.",
+                    "description": "Default range step for `x` ordinal scale when is mark is `text`.\n\n__Default value:__ `90`",
                     "minimum": 0,
                     "type": "number"
                 },
@@ -3466,7 +3466,7 @@
             "properties": {
                 "align": {
                     "$ref": "#/definitions/HorizontalAlign",
-                    "description": "The horizontal alignment of the text. One of `left`, `right`, `center`."
+                    "description": "The horizontal alignment of the text. One of `\"left\"`, `\"right\"`, `\"center\"`."
                 },
                 "angle": {
                     "description": "The rotation angle of the text, in degrees.",
@@ -3476,10 +3476,10 @@
                 },
                 "baseline": {
                     "$ref": "#/definitions/VerticalAlign",
-                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`."
+                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`.\n\n__Default value:__ `\"middle\"`"
                 },
                 "color": {
-                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> blue (`\"\"#4682b4\"`)",
+                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> `\"#4682b4\"`",
                     "type": "string"
                 },
                 "dx": {
@@ -3501,11 +3501,11 @@
                     "type": "number"
                 },
                 "filled": {
-                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\nAll marks except \"point\", \"line\", and \"rule\" are filled by default.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
+                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
                     "type": "boolean"
                 },
                 "font": {
-                    "description": "The typeface to set the text in (e.g., `Helvetica Neue`).",
+                    "description": "The typeface to set the text in (e.g., `\"Helvetica Neue\"`).",
                     "minimum": 0,
                     "type": "string"
                 },
@@ -3516,7 +3516,7 @@
                 },
                 "fontStyle": {
                     "$ref": "#/definitions/FontStyle",
-                    "description": "The font style (e.g., `italic`)."
+                    "description": "The font style (e.g., `\"italic\"`)."
                 },
                 "fontWeight": {
                     "anyOf": [
@@ -3531,7 +3531,7 @@
                             "type": "number"
                         }
                     ],
-                    "description": "The font weight (e.g., `bold`)."
+                    "description": "The font weight (e.g., `\"bold\"`)."
                 },
                 "interpolate": {
                     "$ref": "#/definitions/Interpolate",
@@ -3598,7 +3598,7 @@
                     "type": "number"
                 },
                 "text": {
-                    "description": "Placeholder text if the `text` channel is not specified (`\"Abc\"` by default).",
+                    "description": "Placeholder text if the `text` channel is not specified",
                     "type": "string"
                 },
                 "theta": {
@@ -3657,7 +3657,7 @@
             "properties": {
                 "align": {
                     "$ref": "#/definitions/HorizontalAlign",
-                    "description": "The horizontal alignment of the text. One of `left`, `right`, `center`."
+                    "description": "The horizontal alignment of the text. One of `\"left\"`, `\"right\"`, `\"center\"`."
                 },
                 "angle": {
                     "description": "The rotation angle of the text, in degrees.",
@@ -3672,10 +3672,10 @@
                 },
                 "baseline": {
                     "$ref": "#/definitions/VerticalAlign",
-                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`."
+                    "description": "The vertical alignment of the text. One of `top`, `middle`, `bottom`.\n\n__Default value:__ `\"middle\"`"
                 },
                 "color": {
-                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> blue (`\"\"#4682b4\"`)",
+                    "description": "Default color.\n\n__Default value:__ <span style=\"color: #4682b4;\">&#9632;</span> `\"#4682b4\"`",
                     "type": "string"
                 },
                 "dx": {
@@ -3697,11 +3697,11 @@
                     "type": "number"
                 },
                 "filled": {
-                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\nAll marks except \"point\", \"line\", and \"rule\" are filled by default.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
+                    "description": "Whether the mark's color should be used as fill color instead of stroke color.\n\n__Default value:__ `true` for all marks except `point` and `false` for `point`.\n\n__Applicable for:__ `bar`, `point`, `circle`, `square`, and `area` marks.",
                     "type": "boolean"
                 },
                 "font": {
-                    "description": "The typeface to set the text in (e.g., `Helvetica Neue`).",
+                    "description": "The typeface to set the text in (e.g., `\"Helvetica Neue\"`).",
                     "minimum": 0,
                     "type": "string"
                 },
@@ -3712,7 +3712,7 @@
                 },
                 "fontStyle": {
                     "$ref": "#/definitions/FontStyle",
-                    "description": "The font style (e.g., `italic`)."
+                    "description": "The font style (e.g., `\"italic\"`)."
                 },
                 "fontWeight": {
                     "anyOf": [
@@ -3727,7 +3727,7 @@
                             "type": "number"
                         }
                     ],
-                    "description": "The font weight (e.g., `bold`)."
+                    "description": "The font weight (e.g., `\"bold\"`)."
                 },
                 "interpolate": {
                     "$ref": "#/definitions/Interpolate",
@@ -3790,7 +3790,7 @@
                     "type": "number"
                 },
                 "text": {
-                    "description": "Placeholder text if the `text` channel is not specified (`\"Abc\"` by default).",
+                    "description": "Placeholder text if the `text` channel is not specified",
                     "type": "string"
                 },
                 "theta": {
@@ -3798,7 +3798,7 @@
                     "type": "number"
                 },
                 "thickness": {
-                    "description": "Thickness of the tick mark.",
+                    "description": "Thickness of the tick mark.\n\n__Default value:__  1",
                     "minimum": 0,
                     "type": "number"
                 }

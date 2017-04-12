@@ -143,11 +143,17 @@ export const defaultMarkConfig: MarkConfig = {
 export interface BarConfig extends MarkConfig {
   /**
    * Offset between bar for binned field.  Ideal value for this is either 0 (Preferred by statisticians) or 1 (Vega-Lite Default, D3 example style).
+   *
+   * __Default value:__ 1
+   *
    * @minimum 0
    */
   binSpacing?: number;
   /**
    * Default size of the bars on continuous scales.
+   *
+   * __Default value:__ 2
+   *
    * @minimum 0
    */
   continuousBandSize?: number;
@@ -186,6 +192,9 @@ export interface TickConfig extends MarkConfig {
 
   /**
    * Thickness of the tick mark.
+   *
+   * __Default value:__  1
+   *
    * @minimum 0
    */
   thickness?: number;

@@ -740,6 +740,9 @@ export interface VgMarkConfig {
 
   /**
    * The vertical alignment of the text. One of `top`, `middle`, `bottom`.
+   *
+   * __Default value:__ `"middle"`
+   *
    */
   baseline?: VerticalAlign;
 

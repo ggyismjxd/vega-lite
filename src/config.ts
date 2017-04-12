@@ -144,6 +144,8 @@ export type AreaOverlay = 'line' | 'linepoint' | 'none';
 export interface OverlayConfig {
   /**
    * Whether to overlay line with point.
+   *
+   * __Default value:__ `false`
    */
   line?: boolean;
 
