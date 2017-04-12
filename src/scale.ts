@@ -112,7 +112,7 @@ export interface ScaleConfig {
   /**
    * Default inner padding for `x` and `y` band-ordinal scales.
    *
-   * __Default value:__ 0.1
+   * __Default value:__ `0.1`
    *
    * @minimum 0
    * @maximum 1
@@ -140,7 +140,7 @@ export interface ScaleConfig {
   /**
    * Default spacing between faceted plots.
    *
-   * __Default value:__ 16
+   * __Default value:__ `16`
    *
    * @TJS-type integer
    * @minimum 0
@@ -250,7 +250,7 @@ export interface ScaleConfig {
    * The default collection of symbol shapes for mapping nominal fields to shapes of point marks (i.e., range of a `shape` scale).
    * Each value should be one of: `"circle"`, `"square"`, `"cross"`, `"diamond"`, `"triangle-up"`, or `"triangle-down"`, or a custom SVG path.
    *
-   * __Default value:__ ['"circle"', '"square"', '"cross"', '"diamond"', '"triangle-up"', '"triangle-down"']
+   * __Default value:__ `["circle", "square", "cross", "diamond", "triangle-up", "triangle-down"]`
    *
    */
   shapes?: string[];
