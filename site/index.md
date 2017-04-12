@@ -35,6 +35,11 @@ images:
 {:.hidden}
 # Vega-Lite: a high-level visualization grammar
 
+<div class="page-centered title">
+  <h1>
+    <b>Vega-Lite</b> &ndash; A High-Level Visualization Grammar
+  </h1>
+</div>
 {% include showcase.html %}
 
 {:.lead}

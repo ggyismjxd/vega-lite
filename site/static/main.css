@@ -13,7 +13,7 @@ body {
   max-width: 100%;
 }
 header {
-  background-color: #E6E6E6;
+  background-color: #325;
 }
 a {
   cursor: pointer;
@@ -191,7 +191,7 @@ nav {
 }
 
 nav a {
-  color: #666;
+  color: #eee;
   padding-right: 2em;
   display:inline-block;
 }
@@ -200,9 +200,10 @@ nav a:last-child {
 }
 nav a.active {
   font-weight: bold;
+  color: #fff;
 }
 nav a:hover {
-  color: black;
+  color: #e5b928;
   text-decoration: none;
 }
 
@@ -258,6 +259,10 @@ nav a:hover {
 .sidebar-nav-item a:hover {
   color: black;
   text-decoration: none;
+}
+
+.title h1 {
+  margin-top: 0.3em;
 }
 
 .vl-title {
