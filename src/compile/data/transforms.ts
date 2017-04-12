@@ -3,7 +3,7 @@ import {expression, Filter} from '../../filter';
 import {CalculateTransform, FilterTransform, isCalculate, isFilter} from '../../transform';
 import {VgFilterTransform, VgFormulaTransform} from '../../vega.schema';
 import {Model} from '../model';
-import {DataFlowNode, DependsOnNode, NewFieldNode} from './dataflow';
+import {DataFlowNode, DependentNode, NewFieldNode} from './dataflow';
 
 import * as log from '../../log';
 import {transforms} from './optimizers';
@@ -41,7 +41,7 @@ export class CalculateNode extends DataFlowNode implements NewFieldNode {
     super();
   }
 
-  public produces() {
+  public producedFields() {
     const out = {};
     out[this.transform.as] = true;
     return out;
