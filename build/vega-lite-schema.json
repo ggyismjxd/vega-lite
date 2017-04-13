@@ -1671,6 +1671,17 @@
                     ],
                     "description": "Text of the `text` mark."
                 },
+                "tooltip": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/FieldDef"
+                        },
+                        {
+                            "$ref": "#/definitions/ValueDef<string>"
+                        }
+                    ],
+                    "description": "Tooltip adds basic string tooltip support."
+                },
                 "x": {
                     "anyOf": [
                         {
@@ -3865,6 +3876,17 @@
                 "value": {
                     "description": "A constant value in visual domain.",
                     "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "ValueDef<string>": {
+            "additionalProperties": false,
+            "description": "Definition object for a constant value of an encoding channel.",
+            "properties": {
+                "value": {
+                    "description": "A constant value in visual domain.",
+                    "type": "string"
                 }
             },
             "type": "object"

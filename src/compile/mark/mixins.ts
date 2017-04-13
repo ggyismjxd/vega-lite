@@ -87,6 +87,11 @@ export function text(model: UnitModel) {
   return wrapCondition(model, channelDef && channelDef.condition, 'text', ref.text(channelDef, model.config));
 }
 
+export function tooltip(model: UnitModel) {
+  const channelDef = model.encoding.tooltip;
+  return {tooltip: ref.tooltip(channelDef, model.config)};
+}
+
 export function bandPosition(channel: 'x'|'y', model: UnitModel) {
   // TODO: band scale doesn't support size yet
   const fieldDef = model.encoding[channel];

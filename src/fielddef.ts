@@ -329,6 +329,7 @@ export function channelCompatibility(fieldDef: FieldDef, channel: Channel): {com
     case 'color':
     case 'text':
     case 'detail':
+    case 'tooltip':
       return COMPATIBLE;
 
     case 'opacity':

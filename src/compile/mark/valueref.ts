@@ -135,6 +135,16 @@ export function midPoint(channel: Channel, channelDef: ChannelDef, scaleName: st
   return defaultRef;
 }
 
+export function tooltip(def: FieldDef | ValueDef<string>, config: Config): VgValueRef {
+  if (def) {
+    if (isFieldDef(def)) {
+      return {field: def.field};
+    }
+    return {value: def.value};
+  }
+  return null;
+}
+
 export function text(textDef: TextFieldDef | ValueDef<any>, config: Config): VgValueRef {
   // text
   if (textDef) {

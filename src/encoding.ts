@@ -75,6 +75,11 @@ export interface Encoding {
    * stack order for stacked marks or order of data points in line marks.
    */
   order?: OrderFieldDef | OrderFieldDef[];
+
+  /**
+   * Tooltip adds basic string tooltip support.
+   */
+  tooltip?: FieldDef | ValueDef<string>;
 }
 
 export interface EncodingWithFacet extends Encoding, Facet {}
@@ -111,6 +116,12 @@ export function normalizeEncoding(encoding: Encoding, mark: Mark): Encoding {
       // Drop unsupported channel
 
       log.warn(log.message.incompatibleChannel(channel, mark));
+      return normalizedEncoding;
+    }
+
+    if (channel === 'tooltip') {
+      const channelDef = encoding[channel];
+      normalizedEncoding[channel] = channelDef;
       return normalizedEncoding;
     }
 
